@@ -7,36 +7,28 @@ namespace SkillFactoryCSharp15LINQ
     {
         static void Main(string[] args)
         {
-            var departments = new List<Department>()
-            {
-               new Department() {Id = 1, Name = "Программирование"},
-               new Department() {Id = 2, Name = "Продажи"}
-            };
+            var vwcars = new List<string>() { "Golf", "Bora", "Passat", "Sirocco", "Beetle", "Transporter", "Atlas", "Up", "Lupo" };
+            var delayed = vwcars.Where(name => name.Length>4);
+            vwcars.Remove("Beetle");
+            vwcars.Remove("Atlas");
 
-            var employees = new List<Employee>()
+            Console.WriteLine("Delayed run, Beetle and Atlas was removed after declaring:\n");
+            foreach (var item in delayed)
             {
-               new Employee() { DepartmentId = 1, Name = "Инна", Id = 1},
-               new Employee() { DepartmentId = 1, Name = "Андрей", Id = 2},
-               new Employee() { DepartmentId = 2, Name = "Виктор ", Id = 3},
-               new Employee() { DepartmentId = 3, Name = "Альберт ", Id = 4},
-            };
-
-            var depsWithEmployees = departments.GroupJoin(
-                                                           employees,
-                                                           d => d.Id,
-                                                           e => e.DepartmentId,
-                                                           (d, emps) => new 
-                                                           {
-                                                               Name = d.Name,
-                                                               Employees = emps.Select(e => e.Name)
-                                                           });
-            foreach (var dep in depsWithEmployees)
-            {
-                Console.WriteLine(dep.Name + ":");
-                foreach (string emp in dep.Employees)
-                    Console.WriteLine(emp);
+                Console.WriteLine(item);
             }
-                Console.ReadKey();
+
+            var vwcars2 = new List<string>() { "Golf", "Bora", "Passat", "Sirocco", "Beetle", "Transporter", "Atlas", "Up", "Lupo" };
+            var onthego = vwcars2.Where(name => name.Length > 4).ToArray();
+            vwcars2.Remove("Beetle");
+            vwcars2.Remove("Atlas");
+
+            Console.WriteLine("Run on-the-go, Beetle and Atlas was removed after declaring:\n");
+            foreach (var item in onthego)
+            {
+                Console.WriteLine(item);
+            }
+            Console.ReadKey();
         }
     }
 }
