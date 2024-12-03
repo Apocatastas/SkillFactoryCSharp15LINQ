@@ -7,19 +7,15 @@ namespace SkillFactoryCSharp15LINQ
     {
         static void Main(string[] args)
         {
-            var contacts = new List<Contact>()
-            {
-               new Contact() { Name = "Андрей", Phone = 72345678901 },
-               new Contact() { Name = "Сергей", Phone = 72345678901 },
-               new Contact() { Name = "Иван", Phone = 79999675334 },
-               new Contact() { Name = "Игорь", Phone = 8884994 },
-               new Contact() { Name = "Анна", Phone = 665565656 },
-               new Contact() { Name = "Василий", Phone = 3434 }
-            };
+            int[] numbers = { 9, 3, 2, 0, 9, 56, 4, 23, 88, 12, 123, 9, 0, 4, 5 };
 
-            int result = contacts.Count(s => (s.Phone.ToString().Length != 11)||!s.Phone.ToString().StartsWith('7'));
-            Console.WriteLine(result);
+            Console.WriteLine(Average(numbers).ToString());
             Console.ReadKey();
+        }
+
+        static double Average(int[] numbers)
+        {
+            return numbers.Sum() / (double)numbers.Length;
         }
     }
 }
