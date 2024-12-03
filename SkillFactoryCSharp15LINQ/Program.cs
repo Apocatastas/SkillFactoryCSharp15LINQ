@@ -5,28 +5,17 @@ namespace SkillFactoryCSharp15LINQ
 {
     class Program
     {
-        /// <summary>
-        /// список содержащихся в строке уникальных символов
-        /// без пробелов и следующих знаков препинания: , . ; :  ? !.
-        /// </summary>
-        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            var punctuation = new List<char>()
+            Console.WriteLine("Please enter the number: ");
+            int osn = Convert.ToInt32(Console.ReadLine());
+            List<int> ints = new List<int>();
+            for (int i = 1; i <= osn; i++)
             {
-                ' ', ',', '.', ';', ':', '?', '!'
-            };
-
-            Console.WriteLine("Please enter the text: ");
-            var text = Console.ReadLine();
-
-            var result = text.Except(punctuation).ToArray();
-            Console.WriteLine("Punctuation-free text: \n");
-
-            foreach (var item in result)
-            {
-                Console.Write(item);
+                ints.Add(i);
             }
+            double result = ints.Aggregate((x, y) => x*y);
+            Console.WriteLine("\nFactorial {0} = {1}", osn, result);
             Console.ReadKey();
         }
     }
