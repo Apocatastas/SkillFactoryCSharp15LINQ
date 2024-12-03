@@ -21,17 +21,22 @@ namespace SkillFactoryCSharp15LINQ
                new Employee() { DepartmentId = 3, Name = "Альберт ", Id = 4},
             };
 
-            var employeeAndDep = from employee in employees
-                                 join dep in departments on employee.DepartmentId equals dep.Id
-                                 select new
-                                 {
-                                     EmployeeName = employee.Name,
-                                     DepartmentName = dep.Name
-                                 };
-
-            foreach (var item in employeeAndDep)
-                Console.WriteLine(item.EmployeeName + ", отдел: " + item.DepartmentName);
-            Console.ReadKey();
+            var depsWithEmployees = departments.GroupJoin(
+                                                           employees,
+                                                           d => d.Id,
+                                                           e => e.DepartmentId,
+                                                           (d, emps) => new 
+                                                           {
+                                                               Name = d.Name,
+                                                               Employees = emps.Select(e => e.Name)
+                                                           });
+            foreach (var dep in depsWithEmployees)
+            {
+                Console.WriteLine(dep.Name + ":");
+                foreach (string emp in dep.Employees)
+                    Console.WriteLine(emp);
+            }
+                Console.ReadKey();
         }
     }
 }
