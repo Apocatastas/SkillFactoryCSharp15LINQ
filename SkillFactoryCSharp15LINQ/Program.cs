@@ -7,31 +7,27 @@ namespace SkillFactoryCSharp15LINQ
     {
         static void Main(string[] args)
         {
-            var vwcars = new List<string>() { "Golf", "Bora", "Passat", "Sirocco", "Beetle", "Transporter", "Atlas", "Up", "Lupo" };
-            var delayed = vwcars.Where(name => name.Length>4);
-            vwcars.Remove("Beetle");
-            vwcars.Remove("Atlas");
-
-            Console.WriteLine("Delayed run, Beetle and Atlas was removed after declaring:\n");
-            foreach (var item in delayed)
+            var classes = new[]
             {
-                Console.WriteLine(item);
-            }
-
-            var vwcars2 = new List<string>() { "Golf", "Bora", "Passat", "Sirocco", "Beetle", "Transporter", "Atlas", "Up", "Lupo" };
-            var onthego = vwcars2.Where(name => name.Length > 4).ToArray();
-            vwcars2.Remove("Beetle");
-            vwcars2.Remove("Atlas");
-
-            Console.WriteLine("Run on-the-go, Beetle and Atlas was removed after declaring:\n");
-            foreach (var item in onthego)
-            {
-                Console.WriteLine(item);
-            }
+                new Classroom { Students = {"Evgeniy", "Sergey", "Andrew"}, },
+                new Classroom { Students = {"Anna", "Viktor", "Vladimir"}, },
+                new Classroom { Students = {"Bulat", "Alex", "Galina"}, }
+            };
+            var allStudents = GetAllStudents(classes);
+            Console.WriteLine(string.Join(" ", allStudents));
             Console.ReadKey();
+        }
+
+        static string[] GetAllStudents(Classroom[] classes)
+        {
+            return classes.SelectMany(p => p.Students).ToArray();
+        }
+
+        public class Classroom
+        {
+            public List<string> Students = new List<string>();
         }
     }
 }
-
 
 
