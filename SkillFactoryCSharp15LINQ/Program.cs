@@ -5,18 +5,32 @@ namespace SkillFactoryCSharp15LINQ
 {
     class Program
     {
+        public static List<int> Numbers = new List<int>();
+
         static void Main(string[] args)
         {
-            int[] numbers = { 9, 3, 2, 0, 9, 56, 4, 23, 88, 12, 123, 9, 0, 4, 5 };
-
-            Console.WriteLine(Average(numbers).ToString());
-            Console.ReadKey();
-        }
-
-        static double Average(int[] numbers)
-        {
-            return numbers.Sum() / (double)numbers.Length;
+            while (true)
+            {
+                var input = Console.ReadLine();
+                var isInteger = Int32.TryParse(input, out int inputNum);
+                if (!isInteger)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Вы ввели не число");
+                }
+                else
+                {
+                    Numbers.Add(inputNum);
+                    Console.WriteLine("Число " + input + " добавлено в список.");
+                    Console.WriteLine($" Всего в списке  {Numbers.Count} чисел");
+                    Console.WriteLine($"Сумма:  {Numbers.Sum()}");
+                    Console.WriteLine($"Наибольшее:  {Numbers.Max()}");
+                    Console.WriteLine($"Наименьшее:  {Numbers.Min()}"); Console.WriteLine($"Среднее:  {Numbers.Average()}");
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
+
 
